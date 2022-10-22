@@ -3,7 +3,12 @@ import { IoMdRadioButtonOff } from "react-icons/io";
 import { AiFillDelete } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { completed } from "../../redux/actions/completed";
-import { RefObject, FocusEvent, KeyboardEvent } from "react";
+import {
+  RefObject,
+  FocusEvent,
+  KeyboardEvent,
+  MouseEvent
+} from "react";
 
 type Props = {
   placeholder?: string;
@@ -13,22 +18,20 @@ type Props = {
   check?: boolean;
   refs?: RefObject<HTMLInputElement>;
   handleEvent?: (e: KeyboardEvent<HTMLInputElement>)=>void;
-  handleDelete?: (event: React.MouseEvent<HTMLElement>) => void;
+  handleDelete?: (event: MouseEvent<HTMLElement>) => void;
   handleBlur?: (e: FocusEvent<HTMLInputElement>) =>void;
 };
 
 function Task(props: Props) {
   const dispatch = useDispatch();
-
   function handleClick(e: any) {
-    // const {target} = e
-      dispatch(
-        completed({
-          id: parseInt(e.target.dataset.id),
-          status: e.target.dataset.status,
-          title: e.target.dataset.value,
-        })
-      );
+    dispatch(
+      completed({
+        id: parseInt(e.target.dataset.id),
+        status: e.target.dataset.status,
+        title: e.target.dataset.value,
+      })
+    );
   }
 
   return (
