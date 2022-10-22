@@ -2,13 +2,7 @@ import axiosClient from "./axiosClient";
 import axios from "axios"
 
 interface itodoapp {
-  name?: string,
-  categoryId?: string,
-  startDate?: string,
-  endDate?: string,
-  createdAt?: string,
-  updatedAt?: string,
-  id?: number;
+  id: number;
   title?: string,
   status?: string,
 }

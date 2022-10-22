@@ -1,6 +1,5 @@
 import {
   useEffect,
-  useLayoutEffect,
   useState,
   useRef,
   KeyboardEvent,
@@ -13,35 +12,20 @@ import Task from './components/Tasks';
 
 function App() {
   interface itodoapp {
-    name: string,
-    categoryId: string,
-    startDate: string,
-    endDate: string,
-    createdAt: string,
-    updatedAt: string,
-    id?: number,
+    id: number,
     title: string,
     status: string,
   }
   const [completed, setCompleted] = useState<itodoapp[]>([]);
   const [notcompleted, setNotcompleted] = useState<itodoapp[]>([]);
-  const [arrtodo, setArrtodo] = useState<itodoapp[]>([]);
   const refAdd = useRef<HTMLInputElement>(null);
 // KeyboardEvent
   function handleEventkey(e: KeyboardEvent<HTMLInputElement>) {
-    if (e.keyCode === 13) {
+    if (e.keyCode === 13 ) {
       const count = Math.ceil(Date.now() * Math.random());
-      console.log(count);
-      
       const data: itodoapp = {
         title: refAdd.current?.value || "",
         status: "completed",
-        name: "anh",
-        categoryId: "khanh",
-        startDate: "10/20/2022",
-        endDate: "10/20/2022",
-        createdAt: "10/20/2022",
-        updatedAt: "10/20/2022",
         id: count,
       };
       todoappApi.add(data);
@@ -64,11 +48,10 @@ function App() {
            );
            setNotcompleted([...arr2]);
            setCompleted([...arr1]);
-           setArrtodo([...arr1, ...arr2]);
          })();
     },[])
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (completeds.length > 0 && completeds[0].status === "completed" ) {
       const arr = completed.filter(
         (value: itodoapp) => value.id !== completeds[0].id)
@@ -128,7 +111,7 @@ function App() {
         {completed.map((value: itodoapp) => {
           return (
             <Task
-              key={value.id }
+              key={value.id}
               check={false}
               value={value.title}
               ids={value.id}
